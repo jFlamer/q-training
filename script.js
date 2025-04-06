@@ -88,7 +88,7 @@ const showQuestion = (question) => {
         })
     });
 
-    time = timePerQuestion.value;
+    time = Number(timePerQuestion.value);
     startTimer(time);
 }; 
 
@@ -98,6 +98,7 @@ const startTimer = (time) => {
             progress(time);
             time--;
         } else {
+            clearInterval(timer);
             checkAnswer();
         }
     }, 1000);
@@ -113,7 +114,7 @@ const checkAnswer = () => {
     const selectedAnswer = document.querySelector(".answer.selected");
     if(selectedAnswer){
         const answer = selectedAnswer.querySelector(".text");
-        if(answer === questions[currentQuestion -1].correct_answer){
+        if(answer.innerHTML === questions[currentQuestion -1].correct_answer){
             score++;
             selectedAnswer.classList.add("correct");
         } else {
@@ -171,5 +172,5 @@ const showScore = () => {
 
 const restartBtn = document.querySelector(".restart");
 restartBtn.addEventListener("click", () => {
-    window.locayion.reload();
+    window.location.reload();
 });
